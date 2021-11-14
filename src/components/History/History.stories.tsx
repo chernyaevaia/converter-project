@@ -6,7 +6,7 @@ export default {
     component: History
 } as ComponentMeta<typeof History>
 
-const Template: ComponentStory<typeof History> = (args) => <History {...args}/>
+const Template: ComponentStory<typeof History> = () => <History/>
 
 export const RecentHistory = Template.bind({})
 RecentHistory.args = {}

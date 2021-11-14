@@ -1,8 +1,8 @@
-import './graph.css'
+import styles from './graph.module.scss'
 
 const Graph = () => {
     return (
-        <div className="graph-container">
+        <div className={styles['graph-container']}>
         </div>
     )
 }

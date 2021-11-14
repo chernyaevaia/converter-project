@@ -1,12 +1,13 @@
-import './converter.css'
+import styles from './converter.module.scss'
+
 
 const Converter = () => {
     return (
         <>
-        <div className="converter">
-        <h3 className="converter__header">Конвертер валют</h3>
-        <div className="converter__dropdown-container-1">
-        <select className="converter__dropdown" name="currency" id="currency-from">
+        <div className={styles.converter}>
+        <h3 className={styles.converter__header}>Конвертер валют</h3>
+        <div className={styles['converter__dropdown-container-1']}>
+        <select className={styles.converter__dropdown} name="currency" id="currency-from">
           <option value="USD">USD</option>
           <option value="EUR">EUR</option>
           <option value="GPB">GPB</option>
@@ -14,10 +15,10 @@ const Converter = () => {
           <option value="CHF">CHF</option>
           <option value="JPY">JPY</option>
         </select>
-        <input className="converter__input" type="number" />
+        <input className={styles.converter__input} type="number" />
       </div>
-      <div className="converter__dropdown-container-2">
-        <select className="converter__dropdown" name="currency" id="currency-to">
+      <div className={styles['converter__dropdown-container-2']}>
+        <select className={styles.converter__dropdown} name="currency" id="currency-to">
           <option value="USD">USD</option>
           <option value="EUR">EUR</option>
           <option value="GPB">GPB</option>
@@ -25,7 +26,7 @@ const Converter = () => {
           <option value="CHF">CHF</option>
           <option value="JPY">JPY</option>
         </select>
-        <input className="converter__input" type="number" />
+        <input className={styles.converter__input} type="number" />
       </div>
       </div>
       </>

@@ -1,8 +1,8 @@
-import './news.css'
+import styles from './news.module.scss'
 
 const News = () => {
     return (
-        <div className="news-container"></div>
+        <div className={styles['news-container']}></div>
     )
 }
 

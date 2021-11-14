@@ -6,7 +6,7 @@ export default {
     component: Graph
 } as ComponentMeta<typeof Graph>
 
-const Template: ComponentStory<typeof Graph> = (args) => <Graph {...args}/>
+const Template: ComponentStory<typeof Graph> = () => <Graph/>
 
 export const RateGraph = Template.bind({})
 RateGraph.args = {}

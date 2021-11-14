@@ -6,7 +6,7 @@ export default {
     component: News
 } as ComponentMeta<typeof News>
 
-const Template: ComponentStory<typeof News> = (args) => <News {...args}/>
+const Template: ComponentStory<typeof News> = () => <News/>
 
 export const RecentNews = Template.bind({})
 RecentNews.args = {}

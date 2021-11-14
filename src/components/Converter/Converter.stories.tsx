@@ -6,7 +6,7 @@ export default {
     component: Converter
 } as ComponentMeta<typeof Converter>
 
-const Template: ComponentStory<typeof Converter> = (args) => <Converter {...args}/>
+const Template: ComponentStory<typeof Converter> = () => <Converter/>
 
 export const CurrencyConverter = Template.bind({})
 CurrencyConverter.args = {}

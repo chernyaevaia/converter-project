@@ -6,7 +6,7 @@ export default {
     component: CurrencyCard
 } as ComponentMeta<typeof CurrencyCard>
 
-const Template: ComponentStory<typeof CurrencyCard> = (args) => <CurrencyCard {...args}/>
+const Template: ComponentStory<typeof CurrencyCard> = () => <CurrencyCard/>
 
 export const RateIncrease = Template.bind({})
 RateIncrease.args = {}
