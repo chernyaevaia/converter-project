@@ -7,3 +7,41 @@
     background: #f4f5f7;
     border-radius: 15px;
   }
+
+  .headline{
+    margin: 24px;
+  font-style: normal;
+font-weight: bold;
+font-size: 24px;
+line-height: 28px;
+text-transform: lowercase;
+  }
+
+.headline:first-letter {
+    text-transform: uppercase;
+}
+
+  .description {
+    margin: 24px;
+    font-style: normal;
+font-weight: normal;
+font-size: 20px;
+line-height: 23px;
+  }
+
+  .news-pic{
+    margin-bottom: 24px;
+    margin-left: 24px;
+  position: absolute;
+width: 340px;
+height: auto;
+border-radius: 15px;
+}
+
+.loading-text{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  margin: 100px;
+}
