@@ -1,25 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import CurrencyCard from './components/CurrencyCard';
+import Converter from './components/Converter';
+import Graph from './components/Graph';
+import History from './components/History';
+import News from './components/News'
+import Logo from './components/Logo'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Logo/>
+<CurrencyCard/>
+<Converter/>
+<Graph/>
+<History/>
+<News/>
+</>
   );
 }
 
