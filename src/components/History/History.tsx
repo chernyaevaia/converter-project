@@ -9,7 +9,7 @@ const day3 = moment(new Date()).subtract(3, 'days').format("DD.MM.YY")
 const day4 = moment(new Date()).subtract(4, 'days').format("DD.MM.YY")
 
 
-const History = () => {
+const History: React.FC = () => {
     return (
         <div className={styles['history-container']}>
 

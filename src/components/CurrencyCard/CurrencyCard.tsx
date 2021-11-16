@@ -1,6 +1,40 @@
 import styles from "./currencyCard.module.scss";
 
-const CurrencyCard = () => {
+// import { useState, useEffect } from "react";
+
+// const USDRate = () => {
+//   const [rate, setRate] = useState([])
+
+// useEffect(() => {
+//   fetch("https://freecurrencyapi.net/api/v2/latest?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c&base_currency=USD")
+//   .then(response => response.json())
+//   .then(data => setRate(data.data))
+// })
+
+
+// return (
+// <h1>{rate['RUB']}</h1>
+// );
+// }
+
+
+// const USDHistoryRate = () => {
+//   const [rate, setRate] = useState([])
+
+// useEffect(() => {
+//   fetch("https://freecurrencyapi.net/api/v2/historical?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c&base_currency=USD&date_from=2021-11-10&date_to=2021-11-16")
+//   .then(response => response.json())
+//   .then(data => setRate(data.data["2021-11-10"]))
+// })
+
+// return (
+// <h1>{rate['RUB']}</h1>
+// );
+// }
+
+
+
+const CurrencyCard: React.FC = () => {
   return (
     <>
       <div className={styles["currency-container"]}>

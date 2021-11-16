@@ -1,7 +1,7 @@
 import styles from './converter.module.scss'
 
 
-const Converter = () => {
+const Converter: React.FC = () => {
     return (
         <>
         <div className={styles.converter}>

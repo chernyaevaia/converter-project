@@ -1,6 +1,6 @@
 import styles from './logo.module.scss'
 
-const Logo = () => {
+const Logo: React.FC = () => {
     return (
     <header className={styles.header}>
     <h1 className={styles.h1}>Pet Project</h1>

@@ -1,6 +1,6 @@
 import styles from './graph.module.scss'
 
-const Graph = () => {
+const Graph: React.FC = () => {
     return (
         <div className={styles['graph-container']}>
         </div>
