@@ -1,5 +1,36 @@
 import styles from './converter.module.scss'
 
+// распилить конвертер на 2 части?
+//https://freecurrencyapi.net/api/v2/latest?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c 
+
+//из toCurrency во fromCurrency - деление (if?)
+// Handler для инпутов (e.target.value)
+//onChange для дропдауна
+// onChange для инпутов
+
+// стейты для:
+// - Списка валют
+// - валюты from
+// - валюты to
+// - курса
+// - Инпутов
+
+
+//   const [rate, setRate] = useState(['USD', 'EUR', 'GBP', 'INR', 'CHF', 'JPY'])
+
+// useEffect(() => {
+//   fetch('https://freecurrencyapi.net/api/v2/latest?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c')
+//     .then(res => res.json())
+//      .then(response => response.data)
+//.then(data => {
+//  setOptions([data.base, ])
+//})
+//}, [])
+//
+// еще один useEffect?? повторный запрос когда выбираешь другую валюту??
+// сброс инпутов??
+
+
 
 const Converter: React.FC = () => {
     return (

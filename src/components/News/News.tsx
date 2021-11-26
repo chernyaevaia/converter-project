@@ -1,28 +1,20 @@
-import styles from './news.module.scss'
-import { useState, useEffect } from 'react';
 
+import { observer } from "mobx-react"
+import { useMemo } from "react"
+import { INewsStore } from "./NewsStore"
+import { NewsView } from './NewsView'
+import { NewsViewModel } from './NewsViewModel'
+import { DiContainer } from '../../di/DIContainer'
 
-const News: React.FC = () => {
-    const [news, setNews] = useState([])
+export const News: React.FC = observer(() => {
+  const newsStore = DiContainer.get(INewsStore)
+  const viewModel = useMemo(() => new NewsViewModel(newsStore), [newsStore]);
 
-  useEffect(() => {
-    fetch("https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=3da128da75bb4e819bb876090635ca8f")
-    .then(response => response.json())
-    .then(data => setNews(data.articles))
-  },[])
+  return <NewsView 
+    title={viewModel.title}
+    description={viewModel.description}
+    image={viewModel.image}
+    onClick={viewModel.onClick}
+  />
+});
 
-  const item = news[0]
-  if (!item) return null
-
-  return (
-    <div className={styles['news-container']}>
-
-          <h1 className={styles.headline}>{item['title']}</h1>
-          <p className={styles.description}>{item['description']}</p>
-          <img className={styles['news-pic']} alt="" src={item['urlToImage']}/>
- 
-  </div>
-  );
-}
-
-export default News;

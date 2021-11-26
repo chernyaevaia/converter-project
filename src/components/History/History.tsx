@@ -9,6 +9,26 @@ const day3 = moment(new Date()).subtract(3, 'days').format("DD.MM.YY")
 const day4 = moment(new Date()).subtract(4, 'days').format("DD.MM.YY")
 
 
+
+//получить курс в конкретный день
+//https://freecurrencyapi.net/api/v2/historical?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c&base_currency=`${EUR}`&`{date_from=2021-11-18(дата гггг-мм-дд)}&`${date_to=2021-11-18((дата гггг-мм-дд))}
+
+// const USDHistoryRate = () => {
+//   const [rate, setRate] = useState([])
+
+// useEffect(() => {
+//   fetch("https://freecurrencyapi.net/api/v2/historical?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c&base_currency=USD&date_from=2021-11-10&date_to=2021-11-16")
+//   .then(response => response.json())
+//   .then(data => setRate(data.data["гггг-мм-дд"]))
+// })
+
+// return (
+// <h1>{rate['RUB']}</h1>
+// );
+// }
+
+
+
 const History: React.FC = () => {
     return (
         <div className={styles['history-container']}>
