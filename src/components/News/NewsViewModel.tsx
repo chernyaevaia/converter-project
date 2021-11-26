@@ -1,29 +1,41 @@
-import { computed, makeObservable } from "mobx";
-import { INewsStore } from './NewsStore'
+import { computed, makeObservable } from 'mobx';
+import { INews } from './INews';
+import { INewsStore } from './NewsStore';
 
 export class NewsViewModel {
-    public constructor (private store: INewsStore) {
-        makeObservable(this);
-    }
+  public constructor(private store: INewsStore) {
+    makeObservable(this);
+  }
 
-    @computed 
-    public get title(): string {
-        return this.store.lastNews!.title;
-    }
+  @computed
+  public get ready(): boolean {
+    return !!this.store.lastNews;
+  }
 
-    @computed
-    public get description(): string {
-        return this.store.lastNews!.description;
-    }
+  @computed
+  private get news(): INews {
+    if (!this.store.lastNews) throw new Error('News must be defined');
+    return this.store.lastNews;
+  }
 
-    @computed 
-    public get image(): string {
-        return this.store.lastNews!.image
-    }
+  @computed
+  public get title(): string {
+    return this.news.title;
+  }
 
-    public onClick = (): void => {
-        window.open(this.store.lastNews!.url, '_blank');
-    }
+  @computed
+  public get description(): string {
+    return this.news.description;
+  }
+
+  @computed
+  public get image(): string {
+    return this.news.image;
+  }
+
+  public onClick = (): void => {
+    window.open(this.news.url, '_blank');
+  };
 }
 
 export default NewsViewModel;

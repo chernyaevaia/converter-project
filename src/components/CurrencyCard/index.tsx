@@ -1,1 +1,1 @@
-export {default} from './CurrencyCard'
+export * from './CurrencyCard';
