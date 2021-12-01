@@ -1,19 +1,22 @@
-import styles from './news.module.scss'
+import { observer } from 'mobx-react';
+import { useMemo } from 'react';
+import { INewsStore } from './NewsStore';
+import { NewsView } from './NewsView';
+import { NewsViewModel } from './NewsViewModel';
+import { DiContainer } from '../../di';
 
-const News = () => {
-    return (
-        <div className={styles['news-container']}></div>
-    )
-}
+export const News: React.FC = observer(() => {
+  const newsStore = DiContainer.get(INewsStore);
+  const viewModel = useMemo(() => new NewsViewModel(newsStore), [newsStore]);
 
-export default News;
+  if (!viewModel.ready) return null;
 
-
-// var url = 'https://newsapi.org/v2/top-headlines?' +
-//           'sources=bbc-news&' +
-//           'apiKey=ae3f29be81ef487d9880d9011f252b93';
-// var req = new Request(url);
-// fetch(req)
-//     .then(function(response) {
-//         console.log(response.json());
-//     })
+  return (
+    <NewsView
+      title={viewModel.title}
+      description={viewModel.description}
+      image={viewModel.image}
+      onClick={viewModel.onClick}
+    />
+  );
+});
