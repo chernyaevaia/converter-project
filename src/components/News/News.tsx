@@ -15,7 +15,7 @@ export const News: React.FC = observer(() => {
     <NewsView
       title={viewModel.title}
       description={viewModel.description}
-      image={viewModel.image}
+      urlToImage={viewModel.urlToImage}
       onClick={viewModel.onClick}
     />
   );

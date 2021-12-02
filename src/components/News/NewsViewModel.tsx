@@ -29,8 +29,8 @@ export class NewsViewModel {
   }
 
   @computed
-  public get image(): string {
-    return this.news.image;
+  public get urlToImage(): string {
+    return this.news.urlToImage;
   }
 
   public onClick = (): void => {
