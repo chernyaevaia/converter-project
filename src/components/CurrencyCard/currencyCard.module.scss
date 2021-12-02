@@ -1,19 +1,19 @@
-.currency-container {
+.currencyContainer {
   display: flex;
-  justify-content: space-around;
+  overflow:scroll;
+  justify-content: space-between;
 }
 
-.currency-item {
+.currencyItem {
   position: relative;
-  display: flex;
-  align-items: center;
-  width: 164px;
+  width: auto;
   height: 55px;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.09);
   border-radius: 5px;
+  margin: 0 20px;
 }
 
-.currency-item__currency-type {
+.currencyType {
   margin-left: 12px;
   font-weight: 900;
   font-size: 24px;
@@ -21,7 +21,7 @@
   color: #969696;
 }
 
-.currency-item__exchange-rate {
+.exchangeRate {
   position: absolute;
   top: 8px;
   right: 11px;
@@ -31,7 +31,7 @@
   text-align: right;
 }
 
-.currency-item__rate-change {
+.rateChange {
   position: absolute;
   right: 11px;
   top: 33px;
