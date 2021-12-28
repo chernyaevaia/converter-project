@@ -38,4 +38,3 @@ export class NewsViewModel {
   };
 }
 
-export default NewsViewModel;

@@ -2,26 +2,27 @@ import { observer } from 'mobx-react';
 import { useMemo } from 'react';
 import { DiContainer } from '../../di';
 import { ICurrencyCardStore } from './CurrencyCardStore';
-import { CurrencyCardViewModel } from './CurrencyCardViewModel';
+import { CurrencyCardListViewModel } from './CurrencyCardListViewModel';
 import { CurrencyCardView } from './CurrencyCardView';
 
 
-export const CurrencyCard: React.FC = observer(() => {
+export const CurrencyCardList: React.FC = observer(() => {
   const currencyCardStore = DiContainer.get(ICurrencyCardStore);
-  const viewModel = useMemo(() => new CurrencyCardViewModel(currencyCardStore), [currencyCardStore]);
+  const viewModel = useMemo(() => new CurrencyCardListViewModel(currencyCardStore), [currencyCardStore]);
 
+  return (  
+    viewModel.rates.map(rate => <CurrencyCardView
+    currencyType={rate.currencyType}
+    exchangeRate={rate.exchangeRate}
+  />))
 
-  return (
-    <CurrencyCardView
-      currencyType={viewModel.currencyType}
-      exchangeRate={viewModel.exchangeRate}
-    />
-  );
 });
 
 
 
+//active={viewModel.activeRateType === rate.currencyType}
 
+//отмапить данные, засунув в вьюшку
 
 // import { useState, useEffect } from "react";
 // import styles from './currencyCard.module.scss'
