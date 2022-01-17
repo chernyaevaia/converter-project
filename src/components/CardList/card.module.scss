@@ -1,11 +1,13 @@
 .currencyContainer {
+  min-width: 200px;
+  height: 70px;
     display: flex;
     overflow:scroll;
   }
   
   .currencyItem {
     position: relative;
-    width: 200px;
+    min-width: 200px;
     height: 55px;
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.09);
     border-radius: 5px;

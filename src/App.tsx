@@ -1,11 +1,11 @@
 import './App.css';
-import { News, History, Logo, Graph, Converter, Card } from './components';
+import { News, History, Logo, Graph, Converter, CardList } from './components';
 
 function App() {
   return (
     <>
       <Logo />
-      <Card/>
+      <CardList />
       <Converter />
       <Graph />
       <History />

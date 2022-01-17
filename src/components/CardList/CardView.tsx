@@ -7,10 +7,9 @@ interface Props {
 
 export const CardView: React.FC<Props> = (props) => {
   return (
-    <div className={styles.currencyContainer}>
-    <div className={styles.currencyItem}>
+      <div className={styles.currencyItem}>
         <p className={styles.currencyType}>{props.currencyType}</p>
         <p className={styles.exchangeRate}>{props.exchangeRate}</p>
-          </div></div>
+      </div>
         );
 };

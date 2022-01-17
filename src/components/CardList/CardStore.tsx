@@ -11,7 +11,7 @@ public lastRates: ICard[] = [];
 }
 
 @injectable()
-export class CardStore implements ICardStore{
+export class CardStore implements ICardStore {
   @observable
   public lastRates: ICard[] = [];
 

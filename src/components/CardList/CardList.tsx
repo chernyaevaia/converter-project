@@ -1,23 +1,18 @@
-// import { observer } from 'mobx-react';
-// import { useMemo } from 'react';
-// import { DiContainer } from '../../di';
-// import { ICardStore } from './CardStore';
-// import { CardListViewModel } from './CardListViewModel';
-// import { CardView } from './CardView';
-// import styles from './card.module.scss'
-export {}
-// export const CardList = observer(() => {
-//   const currencyCardStore = DiContainer.get(ICardStore);
-//   const viewModel = useMemo(() => new CardListViewModel(currencyCardStore), [currencyCardStore]);
+import { observer } from 'mobx-react';
+import { useMemo } from 'react';
+import { DiContainer } from '../../di';
+import { ICardStore } from './CardStore';
+import { CardListViewModel } from './CardListViewModel';
+import { Card } from './Card';
+import styles from './card.module.scss'
 
-//   if (!viewModel.ready) return null;
+export const CardList = observer(() => {
+  const currencyCardStore = DiContainer.get(ICardStore);
+  const viewModel = useMemo(() => new CardListViewModel(currencyCardStore), [currencyCardStore]);
 
-//   return (  
-//     viewModel.rates.map(rate => <div className={styles.currencyContainer}>
-//     <CardView
-//     currencyType={rate.currencyType}
-//     exchangeRate={rate.exchangeRate}
-//   />
-//   </div>))
+  if (!viewModel.ready) return null;
 
-// });
+  return (<div className={styles.currencyContainer}>
+    {viewModel.rates.map(rate => <Card key={rate.currencyType} currencyType={rate.currencyType} exchangeRate={rate.exchangeRate} />)}</div>)
+
+});
