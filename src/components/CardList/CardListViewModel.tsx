@@ -19,7 +19,6 @@ export class CardListViewModel {
     if (!this.store.lastRates) throw new Error('Unable to get the rates');
     return this.store.lastRates;
   }
-
 }
 
 DiContainer.register(CardListViewModel, CardListViewModel);
