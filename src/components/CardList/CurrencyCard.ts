@@ -3,6 +3,7 @@ import { ICard } from './ICard';
 
 
 export class CurrencyCard implements ICard {
+
     public currencyType: string;
 
     @observable
@@ -14,6 +15,7 @@ export class CurrencyCard implements ICard {
         this.currencyType = currencyType;
     }
 
+    @observable
     public update (exchangeRate: number) {
         this.exchangeRate = exchangeRate;
     }

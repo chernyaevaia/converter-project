@@ -7,15 +7,13 @@ import { CardView } from './CardView';
 import { CurrencyCard } from './CurrencyCard';
 
 interface Props {
-  currencyType: string,
-  exchangeRate: number, 
-  change: number,
+  card: CurrencyCard
 }
 
 export const Card: React.FC<Props> = observer((props) => {
-  //const { currencyType, exchangeRate } = props;
+  const { card } = props;
   const currencyCardStore = DiContainer.get(ICardStore);
-  const viewModel = useMemo(() => new CardViewModel(currencyCardStore, CurrencyCard), [currencyCardStore]);
+  const viewModel = useMemo(() => new CardViewModel(currencyCardStore, card), [currencyCardStore, card]);
 
   if (!viewModel.ready) return null;
 
@@ -23,7 +21,7 @@ export const Card: React.FC<Props> = observer((props) => {
         <CardView 
         currencyType={viewModel.currencyType} 
         exchangeRate={viewModel.exchangeRate}
-        change={viewModel.change}
+        change={viewModel.fluctuation}
         />
     )
 });

@@ -1,39 +1,41 @@
-import { computed, makeObservable, action } from 'mobx';
+import { computed, makeObservable, reaction, observable } from 'mobx';
 import { ICardStore } from './CardStore';
 import { CurrencyCard } from './CurrencyCard';
+import { DiContainer } from '../../di';
 
 export class CardViewModel {
   public constructor(private store: ICardStore, public model: CurrencyCard) {
     makeObservable(this);
-    makeObservable(CurrencyCard)
+    this.pastRate()
   }
 
   @computed
   public get ready(): boolean {
-    return !!this.store.lastRates;
+    return !!this.store.cardsArray;
   }
 
-  @computed 
+  @computed
   public get currencyType(): string {
-      return this.model.currencyType
+    return this.model.currencyType
   }
 
-  @computed 
+  @computed
   public get exchangeRate(): number {
-      return +(1/this.model.exchangeRate).toFixed(2)
+    return +(1/this.model.exchangeRate).toFixed(2)
   }
 
-  //reaction(() => value, (value, previousValue, reaction) => { sideEffect }, options?)
-  //@action
+  @observable
+  public fluctuation: number | undefined
 
 
-  public get pastRate(): number {
-      return this.pastRate
-    }
+  pastRate(): void {
+    reaction(
+      () => this.exchangeRate,
+      (exchangeRate, prevRate) => {
+        this.fluctuation = exchangeRate - prevRate
+      }
+    );
   }
-  @computed 
-  public get change(): number {
-      return +(1/this.model.exchangeRate).toFixed(2) - +(1/this.pastRate).toFixed(2)
-  }
-
 }
+
+DiContainer.register(CardViewModel, CardViewModel);

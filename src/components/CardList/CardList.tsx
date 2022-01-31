@@ -6,13 +6,17 @@ import { CardListViewModel } from './CardListViewModel';
 import { Card } from './Card';
 import styles from './card.module.scss'
 
+
 export const CardList = observer(() => {
   const currencyCardStore = DiContainer.get(ICardStore);
   const viewModel = useMemo(() => new CardListViewModel(currencyCardStore), [currencyCardStore]);
 
+  console.log('gggggg', (viewModel.ready), (viewModel.cards))
+
   if (!viewModel.ready) return null;
 
   return (<div className={styles.currencyContainer}>
-    {viewModel.rates.map(rate => <Card key={rate.currencyType} currencyType={rate.currencyType} exchangeRate={rate.exchangeRate} />)}</div>)
+    {viewModel.cards.map(card => <Card key={card.currencyType} card={card} />)}</div>)
 
 });
+
