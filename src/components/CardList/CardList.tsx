@@ -11,7 +11,6 @@ export const CardList = observer(() => {
   const currencyCardStore = DiContainer.get(ICardStore);
   const viewModel = useMemo(() => new CardListViewModel(currencyCardStore), [currencyCardStore]);
 
-  console.log('gggggg', (viewModel.ready), (viewModel.cards))
 
   if (!viewModel.ready) return null;
 

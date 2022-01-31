@@ -32,7 +32,7 @@ export class CardViewModel {
     reaction(
       () => this.exchangeRate,
       (exchangeRate, prevRate) => {
-        this.fluctuation = exchangeRate - prevRate
+        this.fluctuation = +(exchangeRate - prevRate).toFixed(3)
       }
     );
   }
