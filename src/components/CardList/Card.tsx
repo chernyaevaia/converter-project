@@ -29,9 +29,9 @@ export const Card: React.FC<Props> = observer((props) => {
         currencyType={viewModel.currencyType} 
         exchangeRate={viewModel.exchangeRate}
         change={viewModel.fluctuation}
-
         />
         </NavLink>
       </>
     )
 });
+
