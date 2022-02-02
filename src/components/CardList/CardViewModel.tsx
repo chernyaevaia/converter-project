@@ -3,6 +3,7 @@ import { ICardStore } from './CardStore';
 import { CurrencyCard } from './CurrencyCard';
 import { DiContainer } from '../../di';
 
+
 export class CardViewModel {
   public constructor(private store: ICardStore, public model: CurrencyCard) {
     makeObservable(this);
