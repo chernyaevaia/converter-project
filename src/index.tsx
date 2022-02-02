@@ -11,7 +11,9 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
     <Routes>
-    <Route path='/:currencyCode' element={<App/>}/></Routes>
+    <Route path='/:' element={<App/>}/>
+    <Route path='/:currencyCode' element={<App/>}/>
+    </Routes>
     </BrowserRouter> 
   </React.StrictMode>,
   document.getElementById('root'),
