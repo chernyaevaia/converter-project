@@ -1,15 +1,15 @@
 import './App.css';
-import { News, History, Logo, Graph, Converter, CurrencyCard } from './components';
+import { News, Logo, Graph, Converter, CardList, History } from './components';
 
 function App() {
   return (
     <>
       <Logo />
-      <CurrencyCard />
+      <CardList/>
+      <News />
       <Converter />
       <Graph />
-      <History />
-      <News />
+      <History/>
     </>
   );
 }
