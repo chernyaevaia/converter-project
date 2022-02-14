@@ -6,11 +6,13 @@ export class CardApi {
 
         public async loadRates(): Promise<Record<string, number>> {
             return await fetch(
-                `https://freecurrencyapi.net/api/v2/latest?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c&base_currency=RUB`
+                `https://freecurrencyapi.net/api/v2/latest?apikey=109f1ea0-8d87-11ec-83e2-19137ee3aa9a&base_currency=RUB`
             )
             .then(response => response.json())
             .then(data => (data.data)); 
             }
 }
+
+//{"USD":0.013114,"JPY":1.49936,"CNY":0.083409,"CHF":0.01204}
 
 DiContainer.register(CardApi, CardApi);
