@@ -34,8 +34,10 @@ export class CardStore implements ICardStore {
         const card = this.ratesMap.get(rate[0]);  // значение по rate[0] - ключу "USD"
       if (card) {                               
         card.update(rate[1]);               
-      } else {
-          let newCard = new CurrencyCard(rate[0], rate[1]);
+      } else if (rate[0] === 'RUB'){
+        return
+      } else{
+            let newCard = new CurrencyCard(rate[0], rate[1]);
           this.ratesMap.set(rate[0], newCard);
         }
       });    
