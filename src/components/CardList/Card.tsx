@@ -14,7 +14,7 @@ interface Props {
 
 export const Card: React.FC<Props> = observer((props) => {
  
-  
+
   const { card } = props;
   const currencyCardStore = DiContainer.get(ICardStore);
   const viewModel = useMemo(() => new CardViewModel(currencyCardStore, card), [currencyCardStore, card]);
@@ -29,9 +29,9 @@ export const Card: React.FC<Props> = observer((props) => {
         currencyType={viewModel.currencyType} 
         exchangeRate={viewModel.exchangeRate}
         change={viewModel.fluctuation}
-
         />
         </NavLink>
       </>
     )
 });
+

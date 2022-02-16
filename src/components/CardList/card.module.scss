@@ -42,7 +42,7 @@
     text-align: right;
   }
   
-  .rateChange {
+  .rateChangeMinus {
     position: absolute;
     right: 11px;
     top: 33px;
@@ -50,7 +50,19 @@
     font-size: 12px;
     line-height: 14px;
     text-align: right;
-    color: #388bf7;
+    color: rgba(223, 69, 69, 1);
+  }
+
+  .rateChangePlus {
+    position: absolute;
+    right: 11px;
+    top: 33px;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: right;
+    color:rgba(112, 204, 121, 1);
+    ;
   }
 
   a{

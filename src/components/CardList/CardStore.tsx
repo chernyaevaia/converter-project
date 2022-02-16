@@ -1,20 +1,16 @@
 import { injectable, inject } from 'inversify';
 import { computed, makeObservable, observable, runInAction } from 'mobx';
 import { CardApi } from './CardApi';
-import { ICard } from './ICard';
 import { DiContainer } from '../../di/DIContainer';
 import { CurrencyCard } from './CurrencyCard';
 
 @injectable()
 export abstract class ICardStore {
-  public lastRates: ICard[] = [];  
   public cardsArray: CurrencyCard[] = []
 }
 
 @injectable()
 export class CardStore implements ICardStore {
-  public lastRates: ICard[] = [];
-
 
   @observable
   private ratesMap: Map<string, CurrencyCard> = new Map<string, CurrencyCard>();
@@ -31,14 +27,17 @@ export class CardStore implements ICardStore {
   }
 
   private async getRates() {
-    const rates = await this.api.loadRates();
+    const rates = await this.api.loadRates(); //{"USD":0.013114,"JPY":1.49936,"CNY":0.083409,"CHF":0.01204}
     runInAction(() => {
-      Object.entries(rates).forEach((rate) => {
-        const card = this.ratesMap.get(rate[0]);  
+      Object.entries(rates) // [["USD", 0.013114], ["JPY", 1.49936], ["CNY", 0.083409], ["CHF", 0.01204]]
+      .forEach((rate) => { //["USD", 0.013114]
+        const card = this.ratesMap.get(rate[0]);  // значение по rate[0] - ключу "USD"
       if (card) {                               
-        card.update(rate[1]);                   
-      } else {
-          let newCard = new CurrencyCard(rate[0], rate[1]);
+        card.update(rate[1]);               
+      } else if (rate[0] === 'RUB'){
+        return
+      } else{
+            let newCard = new CurrencyCard(rate[0], rate[1]);
           this.ratesMap.set(rate[0], newCard);
         }
       });    
@@ -46,7 +45,7 @@ export class CardStore implements ICardStore {
   } 
 
   public updateRate() {
-    setInterval(() => this.getRates(), 30000);
+    setInterval(() => this.getRates(), 300000);
   }
 }
 
