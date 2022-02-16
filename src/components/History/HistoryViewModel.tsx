@@ -4,7 +4,7 @@ import { HistoryCard } from './HistoryCard';
 import { IHistoryStore } from './HistoryStore';
 
 export class HistoryViewModel {
-  public constructor(private store: IHistoryStore, public code: string) {
+  public constructor(private store: IHistoryStore, public code: string | undefined) {
     makeObservable(this);
   }
 
@@ -25,12 +25,15 @@ export class HistoryViewModel {
     return moment(new Date()).subtract(4, 'days').format('YYYY-MM-DD');
   }
 
-  public async init(): Promise<void> {
+  public async init() {
+ 
+    if (this.code === undefined) {
+    return
+    }
 
-    const cards = await this.store.recentHistory(this.code, this.today, this.lastday);
-
+  const cards = await this.store.recentHistory(this.code, this.lastday, this.today);
     runInAction(() => 
-    this.historyCards = cards.filter(card => cards.indexOf(card) < 4)
+    this.historyCards = cards.filter(card => cards.indexOf(card) < 5)
     )
   }
 }

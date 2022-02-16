@@ -1,48 +1,44 @@
 import { observer } from 'mobx-react';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { DiContainer } from '../../di';
 import { IHistoryStore } from './HistoryStore';
 import { HistoryViewModel } from './HistoryViewModel';
 import { HistoryView } from './HistoryView';
 import { useParams } from 'react-router-dom';
-import styles from './history.module.scss'
-
+import styles from './history.module.scss';
 
 export const History: React.FC = observer(() => {
+  const { currencyCode } = useParams();
 
-  const {currencyCode} = useParams();
-
-  if (!currencyCode) {
-    return null
-  }
-  
   const historyStore = DiContainer.get(IHistoryStore);
 
-
-  
   const viewModel = useMemo(() => new HistoryViewModel(historyStore, currencyCode), [historyStore, currencyCode]);
 
+  useEffect(() => {
+    viewModel.init();
+  }, [viewModel]);
+
   if (!viewModel.ready) return null;
+  if (!viewModel.code) return null;
 
-  viewModel.init()
-
-    return (
-      <>
-        <div className={styles.container}>
-          <h3 className={styles.header}>За последние 5 дней</h3>
-          <p className={styles.text}>Дата</p>
-          <p className={styles.text}>Курс</p>
-          <p className={styles.text}>Изменение</p>
-  
-          {viewModel.historyCards
-          .map((card) => ( 
-            <HistoryView 
-            rate={card.rate}
-            date={card.date}
-            change={card.difference} />
-          ))}
-  
+  return (
+    <>
+      <div className={styles.container}>
+      <h3 className={styles.header}>За последние 5 дней</h3>
+      <div className={styles.textContainer}>
+        <p className={styles.text}>Дата</p>
+        <p className={styles.text}>Курс</p>
+        <p className={styles.text}>Изменение</p>
         </div>
-      </>
-    );
-  });
+
+        {viewModel.historyCards.map((card) => (
+          viewModel.historyCards.indexOf(card) % 2 === 0 ?
+          <div className={styles.whiteblock}>
+            <HistoryView rate={card.rate} date={card.date} change={card.difference} />
+          </div>:
+          <HistoryView rate={card.rate} date={card.date} change={card.difference} /> 
+        ))}
+      </div>
+    </>
+  );
+});

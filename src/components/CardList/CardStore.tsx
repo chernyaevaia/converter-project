@@ -43,7 +43,7 @@ export class CardStore implements ICardStore {
   } 
 
   public updateRate() {
-    setInterval(() => this.getRates(), 30000);
+    setInterval(() => this.getRates(), 300000);
   }
 }
 
