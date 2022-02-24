@@ -14,11 +14,9 @@ interface Props {
 
 export const Card: React.FC<Props> = observer((props) => {
  
-
   const { card } = props;
   const currencyCardStore = DiContainer.get(ICardStore);
   const viewModel = useMemo(() => new CardViewModel(currencyCardStore, card), [currencyCardStore, card]);
-
   if (!viewModel.ready) return null;
 
     return (

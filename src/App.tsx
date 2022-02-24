@@ -1,5 +1,6 @@
 import './App.css';
-import { News, Logo, Converter, CardList, History } from './components';
+import { News, Logo, Converter, CardList, History, ChartComponent } from './components';
+
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
       <CardList/>
       <News />
       <History/>
+      <ChartComponent/>
       <Converter />
     </>
   );
