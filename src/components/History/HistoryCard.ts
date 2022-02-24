@@ -14,7 +14,7 @@ export class HistoryCard implements IHistory {
     }
 
     public get difference() {
-        return +(this.rate - this.previousRate).toFixed(2)
+        return (this.rate - this.previousRate).toFixed(2)
     }
     
 }

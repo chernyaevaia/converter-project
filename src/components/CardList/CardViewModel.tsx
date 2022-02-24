@@ -21,19 +21,19 @@ export class CardViewModel {
   }
 
   @computed
-  public get exchangeRate(): number {
-    return +(1/this.model.exchangeRate).toFixed(2)
+  public get exchangeRate(): string {
+    return (1/this.model.exchangeRate).toFixed(2)
   }
 
   @observable
-  public fluctuation: number | undefined
+  public fluctuation: string | undefined
 
 
   pastRate(): void {
     reaction(
-      () => this.exchangeRate,
+      () => +this.exchangeRate,
       (exchangeRate, prevRate) => {
-        this.fluctuation = +(exchangeRate - prevRate).toFixed(3)
+        this.fluctuation = (exchangeRate - prevRate).toFixed(3)
       }
     );
   }
