@@ -1,5 +1,4 @@
 import { injectable, inject } from 'inversify';
-//import { makeObservable, observable } from 'mobx';
 import { HistoryApi } from './HistoryApi';
 import { DiContainer } from '../../di/DIContainer';
 import {HistoryCard} from './HistoryCard'
@@ -30,7 +29,7 @@ export class HistoryStore implements IHistoryStore {
       const histCards = history.map((dailyRates, index) => { // dailyRates это ["2022-01-30", {JMD: 2, MUR: 51.16}] ПЕРВАЯ ДАТА САМАЯ НОВАЯ
 
 
-        let previousRate: number =  index < 4 ? +(1/history[index + 1][1][code]).toFixed(2) : 0; //у первой карточки prevrate 0
+        let previousRate: number =  index < 5 ? +(1/history[index + 1][1][code]).toFixed(2) : 0; //у первой карточки prevrate 0
 
 
           let todayRate: number = +(1/history[index][1][code]).toFixed(2);

@@ -1,64 +1,57 @@
+import { useMemo } from 'react';
 import styles from './converter.module.scss';
+import { DiContainer } from 'src/di';
+import { IConverterStore } from './ConverterStore';
+import { ConverterViewModel } from './ConverterViewModel';
+import { ConverterRowView } from './ConverterView';
+import { observer } from 'mobx-react';
 
-// распилить конвертер на 2 части?
-//https://freecurrencyapi.net/api/v2/latest?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c
 
-//из toCurrency во fromCurrency - деление (if?)
-// Handler для инпутов (e.target.value)
-//onChange для дропдауна
-// onChange для инпутов
+export const Converter: React.FC = observer(() => {
+  const converterStore = DiContainer.get(IConverterStore);
+  const viewModel = useMemo(() => new ConverterViewModel(converterStore), [converterStore]);
 
-// стейты для:
-// - Списка валют
-// - валюты from
-// - валюты to
-// - курса
-// - Инпутов
 
-//   const [rate, setRate] = useState(['USD', 'EUR', 'GBP', 'INR', 'CHF', 'JPY'])
+  function onChangeCurrency1(event: any) {
+    viewModel.selectedCurrency1(event.target.value)
+  }
 
-// useEffect(() => {
-//   fetch('https://freecurrencyapi.net/api/v2/latest?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c')
-//     .then(res => res.json())
-//      .then(response => response.data)
-//.then(data => {
-//  setOptions([data.base, ])
-//})
-//}, [])
-//
-// еще один useEffect?? повторный запрос когда выбираешь другую валюту??
-// сброс инпутов??
+  function onChangeCurrency2(event: any) {
+    viewModel.selectedCurrency2(event.target.value)
+  }
 
-const Converter: React.FC = () => {
+  function onChangeInput1(event: any) {
+    viewModel.getInputTo(event.target.value)
+  }
+
+  function onChangeInput2(event: any) {
+    viewModel.getInputFrom(event.target.value)
+  }
+
+
+
   return (
-    <>
-      <div className={styles.converter}>
-        <h3 className={styles.converter__header}>Конвертер валют</h3>
-        <div className={styles['converter__dropdown-container-1']}>
-          <select className={styles.converter__dropdown} name='currency' id='currency-from'>
-            <option value='USD'>USD</option>
-            <option value='EUR'>EUR</option>
-            <option value='GPB'>GPB</option>
-            <option value='INR'>INR</option>
-            <option value='CHF'>CHF</option>
-            <option value='JPY'>JPY</option>
-          </select>
-          <input className={styles.converter__input} type='number' />
-        </div>
-        <div className={styles['converter__dropdown-container-2']}>
-          <select className={styles.converter__dropdown} name='currency' id='currency-to'>
-            <option value='USD'>USD</option>
-            <option value='EUR'>EUR</option>
-            <option value='GPB'>GPB</option>
-            <option value='INR'>INR</option>
-            <option value='CHF'>CHF</option>
-            <option value='JPY'>JPY</option>
-          </select>
-          <input className={styles.converter__input} type='number' />
-        </div>
-      </div>
-    </>
-  );
-};
+    
+    <div className={styles.converter}>
+      <h3 className={styles.header}>Конвертер валют</h3>
 
-export { Converter };
+      <div className={styles.dropdownСontainer1}>
+      <ConverterRowView
+      currencyOptions={viewModel.currencyOptions}
+      selectedCurrency={viewModel.selectedCurrencyFrom}
+      onChangeCurrency={onChangeCurrency1}
+      onChangeAmount={onChangeInput1}
+      result={viewModel.input1}
+    /></div>
+
+<div className={styles.dropdownСontainer2}>
+<ConverterRowView
+      currencyOptions={viewModel.currencyOptions}
+      selectedCurrency={viewModel.selectedCurrencyTo}
+      onChangeCurrency={onChangeCurrency2}
+      onChangeAmount={onChangeInput2}
+      result={viewModel.result2}
+    /></div>
+    </div>
+  )})
+

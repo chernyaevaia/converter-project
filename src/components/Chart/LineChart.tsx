@@ -36,7 +36,6 @@ export const LineChart: React.FC = observer(() => {
   };
 
   const labels = viewModel.labels
-  //const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
 
   const data = {
     labels,
@@ -65,7 +64,3 @@ export const LineChart: React.FC = observer(() => {
 });
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
-
-
-//[2, 99, 132, 255, 99, 132, 25, 99, 132, 255, 9, 132, 132, 255, 99, 132, 255, 99, 132, 2, 17]
-//['January', 'February', 'March', 'April', 'May', 'June', 'July']
