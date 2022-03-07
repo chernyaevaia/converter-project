@@ -20,7 +20,7 @@ input[type='number'] {
   border-radius: 15px;
 }
 
-.converter__header {
+.header {
   font-weight: bold;
   font-size: 24px;
   line-height: 28px;
@@ -29,14 +29,14 @@ input[type='number'] {
   margin-bottom: 24px;
 }
 
-.converter__dropdown-container-1 {
+.dropdownСontainer1 {
   position: absolute;
   width: 360px;
   height: 40px;
   top: 77px;
   left: 21px;
 }
-.converter__dropdown-container-2 {
+.dropdownСontainer2 {
   position: absolute;
   top: 131px;
   left: 21px;
@@ -44,7 +44,7 @@ input[type='number'] {
   height: 40px;
 }
 
-.converter__dropdown {
+.dropdown {
   background: #d9dfea;
   border-radius: 7px 0px 0px 7px;
   padding-left: 20px;
@@ -55,7 +55,7 @@ input[type='number'] {
   font-size: 18px;
 }
 
-.converter__input {
+.input {
   position: absolute;
   background: #ffffff;
   border: none;

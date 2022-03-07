@@ -4,7 +4,7 @@ import { HistoryCard } from './HistoryCard';
 import { IHistoryStore } from './HistoryStore';
 
 export class HistoryViewModel {
-  public constructor(private store: IHistoryStore, public code: string | undefined) {
+  public constructor(private store: IHistoryStore, public code: string | undefined = 'USD') {
     makeObservable(this);
   }
 
@@ -22,7 +22,7 @@ export class HistoryViewModel {
 
 
   public get lastday(): string {
-    return moment(new Date()).subtract(4, 'days').format('YYYY-MM-DD');
+    return moment(new Date()).subtract(6, 'days').format('YYYY-MM-DD');
   }
 
   public async init() {
