@@ -13,7 +13,7 @@ export enum ChartType {
 
 @injectable()
 export class LineChartViewModel {
-  public constructor(private store: IChartStore, public code: string | undefined) {
+  public constructor(private store: IChartStore, public code: string | undefined = 'USD') {
     makeObservable(this);
     this.updateStartDate();
     this.updateRateArray()

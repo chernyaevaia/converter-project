@@ -5,7 +5,7 @@ import { IChartStore } from './ChartStore';
 
 @injectable()
 export class ChartComponentViewModel {
-  public constructor(private store: IChartStore, public code: string | undefined) {
+  public constructor(private store: IChartStore, public code: string | undefined = 'USD') {
     makeObservable(this);
   }
 
