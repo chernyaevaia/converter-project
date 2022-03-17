@@ -1,16 +1,16 @@
 import './App.css';
-import { News, Logo, Converter, CardList, History, ChartComponent } from './components';
+import { News, Logo, Converter, CardList, ChartComponent, History } from './components';
 
 
 function App() {
   return (
     <>
       <Logo />
-      <CardList/>
       <News />
       <History/>
+      <CardList/>
+      <Converter/>
       <ChartComponent/>
-      <Converter />
     </>
   );
 }

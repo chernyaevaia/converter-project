@@ -22,7 +22,7 @@ export const Card: React.FC<Props> = observer((props) => {
     return (
       <> 
       <NavLink to={`/${viewModel.currencyType}`} 
-      className={({isActive}) => isActive ? styles.currencyItemActive : ''}>
+      className={({isActive}) => isActive ? styles.currencyItemActive : styles.currencyItem}>
         <CardView 
         currencyType={viewModel.currencyType} 
         exchangeRate={viewModel.exchangeRate}

@@ -6,15 +6,14 @@ import { CurrencyCard } from './CurrencyCard';
 
 @injectable()
 export abstract class ICardStore {
-  public cardsArray: CurrencyCard[] = []
+  public cardsArray: CurrencyCard[] = [];
 }
 
 @injectable()
 export class CardStore implements ICardStore {
-
   @observable
   private ratesMap: Map<string, CurrencyCard> = new Map<string, CurrencyCard>();
-  
+
   public constructor(@inject(CardApi) private api: CardApi) {
     makeObservable(this);
     this.getRates();
@@ -23,31 +22,32 @@ export class CardStore implements ICardStore {
 
   @computed
   public get cardsArray(): CurrencyCard[] {
-    return  [...this.ratesMap.values()]
+    return [...this.ratesMap.values()];
   }
 
   private async getRates() {
-    const rates = await this.api.loadRates(); //{"USD":0.013114,"JPY":1.49936,"CNY":0.083409,"CHF":0.01204}
+    const rates = await this.api.loadRates();
+    const rates2 = Object.entries(rates).map((item) => item[1]);
+
     runInAction(() => {
-      Object.entries(rates) // [["USD", 0.013114], ["JPY", 1.49936], ["CNY", 0.083409], ["CHF", 0.01204]]
-      .forEach((rate) => { //["USD", 0.013114]
-        const card = this.ratesMap.get(rate[0]);  // значение по rate[0] - ключу "USD"
-      if (card) {                               
-        card.update(rate[1]);               
-      } else if (rate[0] === 'RUB'){
-        return
-      } else{
-            let newCard = new CurrencyCard(rate[0], rate[1]);
-          this.ratesMap.set(rate[0], newCard);
+      rates2.forEach((rate) => {
+        const card = this.ratesMap.get(rate.code);
+
+        if (card) {
+          card.update(rate.value);
+        } else if (rate.code === 'RUB') {
+          return;
+        } else {
+          let newCard = new CurrencyCard(rate.code, rate.value);
+          this.ratesMap.set(rate.code, newCard);
         }
-      });    
+      });
     });
-  } 
+  }
 
   public updateRate() {
-    setInterval(() => this.getRates(), 300000);
+    setInterval(() => this.getRates(), 60000);
   }
 }
-
 
 DiContainer.register(ICardStore, CardStore);

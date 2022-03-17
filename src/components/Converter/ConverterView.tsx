@@ -2,10 +2,10 @@ import styles from './converter.module.scss'
 
 interface Props {
   currencyOptions: string[]
-  selectedCurrency: any;
-  onChangeCurrency: any;
-  onChangeAmount: any;
-  result: any;
+  selectedCurrency: string;
+  onChangeCurrency: React.ChangeEventHandler<HTMLSelectElement>;
+  onChangeAmount:  React.ChangeEventHandler<HTMLInputElement>;
+  result: string;
 }
 
 

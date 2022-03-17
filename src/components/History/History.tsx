@@ -34,9 +34,9 @@ export const History: React.FC = observer(() => {
         {viewModel.historyCards.map((card) => (
           viewModel.historyCards.indexOf(card) % 2 === 0 ?
           <div className={styles.whiteblock}>
-            <HistoryView rate={card.rate} date={card.date} change={card.difference} />
+            <HistoryView key={card.date} rate={card.rate} date={card.date} change={card.difference} />
           </div>:
-          <HistoryView rate={card.rate} date={card.date} change={card.difference} /> 
+          <HistoryView key={card.date} rate={card.rate} date={card.date} change={card.difference} /> 
         ))}
       </div>
     </>

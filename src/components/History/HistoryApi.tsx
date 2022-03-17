@@ -1,17 +1,27 @@
 import { injectable} from 'inversify';
 import { DiContainer } from '../../di';
 
+interface RateCardDTO {
+  code: string,
+  value: number
+}
+
+interface DayDTO {
+[code: string]: RateCardDTO
+}
+
 interface HistoryDTO {
-[data: string]: {[currency: string]: number}
+datetime: string,
+currencies: DayDTO
 }
 
 @injectable()
 export class HistoryApi {
 
-        public async loadHistory(baseCurrency: string, day5: string, today: string): Promise<HistoryDTO> {
+        public async loadHistory(baseCurrency: string, day5: string, today: string): Promise<HistoryDTO[]> {
 
           return  await fetch(
-            `https://freecurrencyapi.net/api/v2/historical?apikey=109f1ea0-8d87-11ec-83e2-19137ee3aa9a&base_currency=${baseCurrency}&date_from=${day5}&date_to=${today}`
+            `https://api.currencyapi.com/v3/range?apikey=8e1459f0-45fa-11ec-87dc-27eb5ec7374c&base_currency=${baseCurrency}&datetime_start=${day5}&datetime_end=${today}`
           )
             .then(response => response.json())
             .then(data => data.data);
@@ -22,11 +32,6 @@ export class HistoryApi {
 
 DiContainer.register(HistoryApi, HistoryApi);
 
-//data:
-
-//{"2020-10-01":{"AED":3.6733,"RUB":77.24319}, "2020-10-02":{"URY":42.53047,"MWK":743.93852}
-
-//НАЧИНАЕТСЯ С САМОЙ ПРОШЛОЙ ДАТЫ
 
 
 

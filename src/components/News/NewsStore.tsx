@@ -1,30 +1,36 @@
 import { injectable, inject } from 'inversify';
-import { makeObservable, observable, runInAction } from 'mobx';
 import { INews } from './INews';
 import { NewsApi } from './NewsApi';
 import { DiContainer } from '../../di';
+import { observable, runInAction } from 'mobx';
 
 @injectable()
 export abstract class INewsStore {
-  public abstract lastNews: INews | undefined;
+  public abstract getNews(pageNumber: number): Promise<INews>;
+  public newsCount: number = 1
 }
 
 @injectable()
 export class NewsStore implements INewsStore {
-  @observable
-  public lastNews: INews | undefined;
-
   public constructor(@inject(NewsApi) private api: NewsApi) {
-    makeObservable(this);
-    this.getNews();
+   this.getNewsAmount()
   }
 
-  private async getNews() {
-    const allNews = await this.api.loadNews();
-    runInAction(() => {
-      this.lastNews = allNews[0];
-    });
+  @observable
+  public newsCount: number = 1
+
+  public async getNews(pageNumber: number): Promise<INews> {
+    const news = await this.api.loadNews(pageNumber);
+    return news[0];
   }
+
+  public async getNewsAmount(): Promise<void> {
+    const count = await this.api.loadNewsAmount();
+    runInAction(() => {
+      this.newsCount = count
+    })
+  }
+
 }
 
 DiContainer.register(INewsStore, NewsStore);

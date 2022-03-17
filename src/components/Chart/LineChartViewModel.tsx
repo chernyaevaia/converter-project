@@ -20,14 +20,14 @@ export class LineChartViewModel {
   }
 
   @observable
-  public chartType: ChartType = ChartType.MONTH;
+  public chartType: ChartType = ChartType.WEEK;
 
   @observable
   public ratesArray: number[] = [];
 
 
-  public get today(): string {
-    return moment(new Date()).format('YYYY-MM-DD');
+  public get yesterday(): string {
+    return moment(new Date()).subtract(1, 'days').format('YYYY-MM-DD');
   }
 
   public getTypeOnClick(chartType: ChartType): () => void {
@@ -56,11 +56,11 @@ export class LineChartViewModel {
   public get labels() {
     if (this.chartType === 0) {
       const day7 = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-      return this.getDates(day7, new Date());
+      return this.getDates(day7, new Date((Date.now() - 1 * 24 * 60 * 60 * 1000)));
 
     } else if (this.chartType === 1) {
       const day30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-      return this.getDates(day30, new Date());
+      return this.getDates(day30, new Date((Date.now() - 1 * 24 * 60 * 60 * 1000)));
 
     } else if (this.chartType === 2) {
       let theMonths = [
@@ -120,26 +120,21 @@ export class LineChartViewModel {
  public updateStartDate() {
     reaction(
       () => this.chartType,
-
+      
       (chartType) => {
         if (chartType === 0) {
-          console.log('week');
           this.startDate = moment(new Date()).subtract(7, 'days').format('YYYY-MM-DD');
-          console.log(this.startDate);
         } else if (chartType === 1) {
-          console.log('month');
           this.startDate = moment(new Date()).subtract(30, 'days').format('YYYY-MM-DD');
-          console.log(this.startDate);
         } else if (chartType === 2) {
-          console.log('quarter');
           this.startDate = moment(new Date()).subtract(90, 'days').format('YYYY-MM-DD');
-          console.log(this.startDate);
         } else {
-          console.log('year');
           this.startDate = moment(new Date()).subtract(365, 'days').format('YYYY-MM-DD');
-          console.log(this.startDate);
         }
       },
+      {
+        fireImmediately: true,
+      }
     );
   }
 
@@ -158,8 +153,8 @@ export class LineChartViewModel {
       return;
     }
 
-    const histRates = await this.store.getHistoryRates(this.code, this.startDate, this.today); //массив курсов с даты по дату
-    runInAction(() => (this.ratesArray = histRates));
+    const histRates = await this.store.getHistoryRates(this.code, this.startDate, this.yesterday); //массив курсов с даты по дату
+    runInAction(() => (this.ratesArray = histRates));    
   }
 }
 

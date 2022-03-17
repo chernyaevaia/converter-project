@@ -6,16 +6,15 @@ import { computed, makeObservable, observable, runInAction } from 'mobx';
 
 @injectable()
 export abstract class IChartStore {
-  public cardsArray: ChartCard[] = []
-  public abstract getHistoryRates(code: string, dateFrom: string, dateTo: string): Promise<number[]>
+  public cardsArray: ChartCard[] = [];
+  public abstract getHistoryRates(code: string, dateFrom: string, dateTo: string): Promise<number[]>;
 }
 
 @injectable()
 export class ChartStore implements IChartStore {
-
   @observable
   private ratesMap: Map<string, ChartCard> = new Map<string, ChartCard>();
-  
+
   public constructor(@inject(ChartApi) private api: ChartApi) {
     makeObservable(this);
     this.getCurrentRates();
@@ -24,39 +23,41 @@ export class ChartStore implements IChartStore {
 
   @computed
   public get cardsArray(): ChartCard[] {
-    return  [...this.ratesMap.values()]
+    return [...this.ratesMap.values()];
   }
 
-  private async getCurrentRates() { //ДЛЯ ЗАГОЛОВКА ГРАФИКА
-    const rates = await this.api.loadCurrentRates('RUB'); 
+  private async getCurrentRates(): Promise<void> {
+    const rates = await this.api.loadCurrentRates('RUB');
+    const rates2 = Object.entries(rates).map((rate3) => rate3[1]);
+
     runInAction(() => {
-      Object.entries(rates) 
-      .forEach((rate) => { 
-        const card = this.ratesMap.get(rate[0]); 
-      if (card) {                               
-        card.update(rate[1]);               
-      } else if (rate[0] === 'RUB'){
-        return
-      } else{
-            let newCard = new ChartCard(rate[0], rate[1]);
-          this.ratesMap.set(rate[0], newCard);
+      rates2.forEach((rate) => {
+        const card = this.ratesMap.get(rate.code);
+        if (card) {
+          card.update(rate.value);
+        } else if (rate.code === 'RUB') {
+          return;
+        } else {
+          let newCard = new ChartCard(rate.code, rate.value);
+          this.ratesMap.set(rate.code, newCard);
         }
-      });    
+      });
     });
-  } 
+  }
 
   public updateRate() {
-    setInterval(() => this.getCurrentRates(), 300000);
+    setInterval(() => this.getCurrentRates(), 60000);
   }
 
-  public async getHistoryRates (code: string, dateFrom: string, dateTo: string): Promise<number[]> { //массив курсов для графика
+  public async getHistoryRates(code: string, dateFrom: string, dateTo: string): Promise<number[]> {
+    const historyRates = await this.api.loadRatesHistory('RUB', dateFrom, dateTo);
 
-    const historyRates = await this.api.loadRatesHistory('RUB', dateFrom, dateTo)
-    const history = Object.entries(historyRates).map((dailyRates => +(1/dailyRates[1][code]).toFixed(3)))
-    
-    return history
+    const rates = historyRates.map(item => item.currencies).map((item => {
+      const valueCard = item[code]
+        return 1/valueCard.value;
+    }))
+    return rates
   }
 }
-
 
 DiContainer.register(IChartStore, ChartStore);

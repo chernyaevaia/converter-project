@@ -1,20 +1,19 @@
 import { IHistory } from './IHistory';
 
-
 export class HistoryCard implements IHistory {
 
     public date: string;
-    public rate: number;
-    public previousRate: number;
+    public rate: string;
+    public previousRate: string;
   
-    public constructor(date: string, rate: number, prevRate:number) {
+    public constructor(date: string, rate: string, prevRate: string) {
         this.date = date;
         this.rate = rate;
-        this.previousRate = prevRate; //сюда передать предыдущий курс
+        this.previousRate = prevRate;
     }
 
     public get difference() {
-        return (this.rate - this.previousRate).toFixed(2)
+        return (+this.rate - +this.previousRate).toFixed(2)
     }
     
 }

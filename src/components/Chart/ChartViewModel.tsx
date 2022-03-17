@@ -1,14 +1,13 @@
-import { computed, makeObservable, reaction, observable } from 'mobx';
+import { computed, makeObservable, reaction, observable} from 'mobx';
 import { IChartStore } from './ChartStore';
 import { ChartCard } from './ChartCard';
 import { DiContainer } from '../../di';
 import moment from 'moment';
 
-
 export class ChartViewModel {
   public constructor(private store: IChartStore, public model: ChartCard) {
     makeObservable(this);
-    this.pastRate()
+    this.pastRate();
   }
 
   public get today(): string {
@@ -22,27 +21,26 @@ export class ChartViewModel {
 
   @computed
   public get currencyType(): string {
-    return this.model.currencyType
+    return this.model.currencyType;
   }
 
   @computed
-  public get exchangeRate(): number {
-    return +(1/this.model.exchangeRate).toFixed(4)
+  public get exchangeRate(): string {
+    return (1 / this.model.exchangeRate).toFixed(4);
   }
 
   @observable
-  public fluctuation: number | undefined
+  public fluctuation: string | undefined
 
 
-  pastRate(): void {
+  pastRate (): void {
     reaction(
-      () => this.exchangeRate,
+      () => +this.exchangeRate,
       (exchangeRate, prevRate) => {
-        this.fluctuation = +(exchangeRate - prevRate).toFixed(3)
-      }
+        this.fluctuation = (exchangeRate - prevRate).toFixed(3);
+      },
     );
   }
-
 }
 
 DiContainer.register(ChartViewModel, ChartViewModel);

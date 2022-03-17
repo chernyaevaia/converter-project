@@ -6,7 +6,6 @@ import { ConverterCard } from './ConverterCard';
 
 @injectable()
 export abstract class IConverterStore {
-
     public cardsArray: ConverterCard[] = []
 }
 
@@ -25,19 +24,22 @@ export class ConverterStore implements IConverterStore {
   
   @computed
   public get cardsArray(): ConverterCard[] {
-    return [...this.ratesMap.values()]; //получены карточки с обновляемым курсом
+    return [...this.ratesMap.values()];
   }
 
-  private async getRates() {
+  private async getRates(): Promise<void> {
     const rates = await this.api.loadCurrentRates('RUB');
+    const rates2 = Object.entries(rates).map((item) => item[1]);
+
     runInAction(() => {
-      Object.entries(rates).forEach((rate) => {
-        const card = this.ratesMap.get(rate[0]);
+      rates2.forEach((rate) => {
+        const card = this.ratesMap.get(rate.code);
+
         if (card) {
-          card.update(rate[1]);
+          card.update(rate.value);
         } else {
-          let newCard = new ConverterCard(rate[0], rate[1]);
-          this.ratesMap.set(rate[0], newCard);
+          let newCard = new ConverterCard(rate.code, rate.value);
+          this.ratesMap.set(rate.code, newCard);
         }
       });
     });
