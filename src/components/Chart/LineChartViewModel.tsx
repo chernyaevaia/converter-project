@@ -16,7 +16,7 @@ export class LineChartViewModel {
   public constructor(private store: IChartStore, public code: string | undefined = 'USD') {
     makeObservable(this);
     this.updateStartDate();
-    this.updateRateArray()
+    this.updateRateArray();
   }
 
   @observable
@@ -24,7 +24,6 @@ export class LineChartViewModel {
 
   @observable
   public ratesArray: number[] = [];
-
 
   public get yesterday(): string {
     return moment(new Date()).subtract(1, 'days').format('YYYY-MM-DD');
@@ -48,7 +47,7 @@ export class LineChartViewModel {
       dates.push(currentDate);
       currentDate = addDays.call(currentDate, 1);
     }
-    const datesLabels = dates.map(date => moment(date).format('Do MMMM'))
+    const datesLabels = dates.map((date) => moment(date).format('Do MMMM'));
     return datesLabels;
   }
 
@@ -56,12 +55,10 @@ export class LineChartViewModel {
   public get labels() {
     if (this.chartType === 0) {
       const day7 = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-      return this.getDates(day7, new Date((Date.now() - 1 * 24 * 60 * 60 * 1000)));
-
+      return this.getDates(day7, new Date(Date.now() - 1 * 24 * 60 * 60 * 1000));
     } else if (this.chartType === 1) {
       const day30 = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-      return this.getDates(day30, new Date((Date.now() - 1 * 24 * 60 * 60 * 1000)));
-
+      return this.getDates(day30, new Date(Date.now() - 1 * 24 * 60 * 60 * 1000));
     } else if (this.chartType === 2) {
       let theMonths = [
         'January',
@@ -86,7 +83,6 @@ export class LineChartViewModel {
         quartalLabels.push(month + ' ' + year);
       }
       return quartalLabels;
-
     } else {
       let theMonths = [
         'January',
@@ -117,10 +113,10 @@ export class LineChartViewModel {
   @observable
   public startDate: string = '';
 
- public updateStartDate() {
+  public updateStartDate() {
     reaction(
       () => this.chartType,
-      
+
       (chartType) => {
         if (chartType === 0) {
           this.startDate = moment(new Date()).subtract(7, 'days').format('YYYY-MM-DD');
@@ -134,17 +130,16 @@ export class LineChartViewModel {
       },
       {
         fireImmediately: true,
-      }
+      },
     );
   }
-
 
   updateRateArray(): void {
     reaction(
       () => this.startDate,
       () => {
-       this.init()
-      }
+        this.init();
+      },
     );
   }
 
@@ -154,7 +149,7 @@ export class LineChartViewModel {
     }
 
     const histRates = await this.store.getHistoryRates(this.code, this.startDate, this.yesterday); //массив курсов с даты по дату
-    runInAction(() => (this.ratesArray = histRates));    
+    runInAction(() => (this.ratesArray = histRates));
   }
 }
 

@@ -24,20 +24,22 @@ export const History: React.FC = observer(() => {
   return (
     <>
       <div className={styles.container}>
-      <h3 className={styles.header}>За последние 5 дней</h3>
-      <div className={styles.textContainer}>
-        <p className={styles.text}>Дата</p>
-        <p className={styles.text}>Курс</p>
-        <p className={styles.text}>Изменение</p>
+        <h3 className={styles.header}>За последние 5 дней</h3>
+        <div className={styles.textContainer}>
+          <p className={styles.text}>Дата</p>
+          <p className={styles.text}>Курс</p>
+          <p className={styles.text}>Изменение</p>
         </div>
 
-        {viewModel.historyCards.map((card) => (
-          viewModel.historyCards.indexOf(card) % 2 === 0 ?
-          <div className={styles.whiteblock}>
+        {viewModel.historyCards.map((card) =>
+          viewModel.historyCards.indexOf(card) % 2 === 0 ? (
+            <div className={styles.whiteblock}>
+              <HistoryView key={card.date} rate={card.rate} date={card.date} change={card.difference} />
+            </div>
+          ) : (
             <HistoryView key={card.date} rate={card.rate} date={card.date} change={card.difference} />
-          </div>:
-          <HistoryView key={card.date} rate={card.rate} date={card.date} change={card.difference} /> 
-        ))}
+          ),
+        )}
       </div>
     </>
   );

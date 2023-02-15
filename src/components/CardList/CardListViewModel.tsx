@@ -11,15 +11,14 @@ export class CardListViewModel {
 
   @computed
   public get ready(): boolean {
-    return !!this.store.cardsArray
+    return !!this.store.cardsArray;
   }
 
   @computed
   get cards() {
     if (!this.store.cardsArray) throw new Error('Unable to get the cards');
-    return this.store.cardsArray
+    return this.store.cardsArray;
   }
-
 }
 
 DiContainer.register(CardListViewModel, CardListViewModel);

@@ -1,78 +1,75 @@
 .currencyContainer {
   height: 70px;
   display: flex;
-  overflow:scroll;
-  }
-  
-  .currencyItem {
-    position: relative;
-    min-width: 180px;
-    height: 55px;
-    margin: 0 20px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.09);
-    border-radius: 5px;
-  }
+  overflow: scroll;
+}
 
-  .currencyItemActive {
-    position: relative;
-    min-width: 180px;
-    height: 55px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.09);
-    border-radius: 5px;
-    margin: 0 20px;
-    border: 2px solid rgba(78, 149, 201, 1)
-  }
+.currencyItem {
+  position: relative;
+  min-width: 180px;
+  height: 55px;
+  margin: 0 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.09);
+  border-radius: 5px;
+}
 
-  
-  .currencyType {
-    margin-left: 12px;
-    margin-top: 8px;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 28px;
-    color: #969696;
-  }
-  
-  .exchangeRate {
-    position: absolute;
-    top: 8px;
-    right: 11px;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 28px;
-    text-align: right;
-  }
-  
-  .rateChangeMinus {
-    position: absolute;
-    right: 11px;
-    top: 33px;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 14px;
-    text-align: right;
-    color: rgba(223, 69, 69, 1);
-  }
+.currencyItemActive {
+  position: relative;
+  min-width: 180px;
+  height: 55px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.09);
+  border-radius: 5px;
+  margin: 0 20px;
+  border: 2px solid rgba(78, 149, 201, 1);
+}
 
-  .rateChangePlus {
-    position: absolute;
-    right: 11px;
-    top: 33px;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 14px;
-    text-align: right;
-    color:rgba(112, 204, 121, 1);
-    ;
-  }
+.currencyType {
+  margin-left: 12px;
+  margin-top: 8px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 28px;
+  color: #969696;
+}
 
-  a{
-    text-decoration: none;
-    color:black;
-  }
-  
-  a:visited { 
-    text-decoration: none; 
-    color: black;
-   }
-  
+.exchangeRate {
+  position: absolute;
+  top: 8px;
+  right: 11px;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: right;
+}
+
+.rateChangeMinus {
+  position: absolute;
+  right: 11px;
+  top: 33px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: right;
+  color: rgba(223, 69, 69, 1);
+}
+
+.rateChangePlus {
+  position: absolute;
+  right: 11px;
+  top: 33px;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: right;
+  color: rgba(112, 204, 121, 1);
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  text-decoration: none;
+  color: black;
+}

@@ -10,8 +10,6 @@ export const Converter: React.FC = observer(() => {
   const converterStore = DiContainer.get(IConverterStore);
   const viewModel = useMemo(() => new ConverterViewModel(converterStore), [converterStore]);
 
-
-
   return (
     <div className={styles.converter}>
       <h3 className={styles.header}>Конвертер валют</h3>

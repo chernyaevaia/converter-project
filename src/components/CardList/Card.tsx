@@ -5,31 +5,31 @@ import { ICardStore } from './CardStore';
 import { CardViewModel } from './CardViewModel';
 import { CardView } from './CardView';
 import { CurrencyCard } from './CurrencyCard';
-import {NavLink } from 'react-router-dom';
-import styles from './card.module.scss'
+import { NavLink } from 'react-router-dom';
+import styles from './card.module.scss';
 
 interface Props {
-  card: CurrencyCard
+  card: CurrencyCard;
 }
 
 export const Card: React.FC<Props> = observer((props) => {
- 
   const { card } = props;
   const currencyCardStore = DiContainer.get(ICardStore);
   const viewModel = useMemo(() => new CardViewModel(currencyCardStore, card), [currencyCardStore, card]);
   if (!viewModel.ready) return null;
 
-    return (
-      <> 
-      <NavLink to={`/${viewModel.currencyType}`} 
-      className={({isActive}) => isActive ? styles.currencyItemActive : styles.currencyItem}>
-        <CardView 
-        currencyType={viewModel.currencyType} 
-        exchangeRate={viewModel.exchangeRate}
-        change={viewModel.fluctuation}
+  return (
+    <>
+      <NavLink
+        to={`/${viewModel.currencyType}`}
+        className={({ isActive }) => (isActive ? styles.currencyItemActive : styles.currencyItem)}
+      >
+        <CardView
+          currencyType={viewModel.currencyType}
+          exchangeRate={viewModel.exchangeRate}
+          change={viewModel.fluctuation}
         />
-        </NavLink>
-      </>
-    )
+      </NavLink>
+    </>
+  );
 });
-

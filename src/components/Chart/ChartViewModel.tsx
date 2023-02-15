@@ -1,4 +1,4 @@
-import { computed, makeObservable, reaction, observable} from 'mobx';
+import { computed, makeObservable, reaction, observable } from 'mobx';
 import { IChartStore } from './ChartStore';
 import { ChartCard } from './ChartCard';
 import { DiContainer } from '../../di';
@@ -30,10 +30,9 @@ export class ChartViewModel {
   }
 
   @observable
-  public fluctuation: string | undefined
+  public fluctuation: string | undefined;
 
-
-  pastRate (): void {
+  pastRate(): void {
     reaction(
       () => +this.exchangeRate,
       (exchangeRate, prevRate) => {

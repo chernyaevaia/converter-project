@@ -8,33 +8,28 @@ export class HistoryViewModel {
     makeObservable(this);
   }
 
- @observable
+  @observable
   public historyCards: HistoryCard[] = [];
 
   @computed
   public get ready() {
-    return !!this.historyCards
+    return !!this.historyCards;
   }
 
   public get yesterday(): string {
     return moment(new Date()).subtract(1, 'days').format('YYYY-MM-DD');
   }
 
-
   public get lastday(): string {
     return moment(new Date()).subtract(7, 'days').format('YYYY-MM-DD');
   }
 
   public async init() {
- 
     if (this.code === undefined) {
-    return
+      return;
     }
 
-  const cards = await this.store.recentHistory(this.code, this.lastday, this.yesterday);
-    runInAction(() => 
-    this.historyCards = cards.filter(card => cards.indexOf(card) < 5)
-    )
+    const cards = await this.store.recentHistory(this.code, this.lastday, this.yesterday);
+    runInAction(() => (this.historyCards = cards.filter((card) => cards.indexOf(card) < 5)));
   }
 }
-  

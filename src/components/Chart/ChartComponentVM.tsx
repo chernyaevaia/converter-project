@@ -11,15 +11,14 @@ export class ChartComponentViewModel {
 
   @computed
   public get ready(): boolean {
-    return !!this.store.cardsArray
+    return !!this.store.cardsArray;
   }
 
   @computed
   get cards() {
     if (!this.store.cardsArray) throw new Error('Unable to get the cards');
-    return this.store.cardsArray.filter(card =>  card.currencyType === this.code)
+    return this.store.cardsArray.filter((card) => card.currencyType === this.code);
   }
-
 }
 
 DiContainer.register(ChartComponentViewModel, ChartComponentViewModel);

@@ -4,8 +4,6 @@ import { INewsStore } from './NewsStore';
 import { NewsView } from './NewsView';
 import { NewsViewModel } from './NewsViewModel';
 import { DiContainer } from '../../di';
-import {NavLink } from 'react-router-dom';
-import styles from './news.module.scss';
 
 export const News: React.FC = observer(() => {
 
@@ -16,7 +14,6 @@ export const News: React.FC = observer(() => {
   if (!viewModel.ready) return null;
 
   return (
-    <>
     <NewsView
       title={viewModel.title}
       description={viewModel.description}
@@ -24,9 +21,5 @@ export const News: React.FC = observer(() => {
       nextClick={viewModel.nextClick}
       backClick={viewModel.backClick}
     />
-    <NavLink to={`/${viewModel.pageNumber}`}>
-    <button className={styles.readMoreBtn}>Read more</button>
-    </NavLink>
-    </>
   );
 });

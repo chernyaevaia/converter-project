@@ -52,11 +52,13 @@ export class ChartStore implements IChartStore {
   public async getHistoryRates(code: string, dateFrom: string, dateTo: string): Promise<number[]> {
     const historyRates = await this.api.loadRatesHistory('RUB', dateFrom, dateTo);
 
-    const rates = historyRates.map(item => item.currencies).map((item => {
-      const valueCard = item[code]
-        return 1/valueCard.value;
-    }))
-    return rates
+    const rates = historyRates
+      .map((item) => item.currencies)
+      .map((item) => {
+        const valueCard = item[code];
+        return 1 / valueCard.value;
+      });
+    return rates;
   }
 }
 

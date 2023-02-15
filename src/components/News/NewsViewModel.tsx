@@ -1,58 +1,59 @@
-import { action, computed, makeObservable, observable, reaction, runInAction} from 'mobx';
+import { action, computed, makeObservable, observable, reaction, runInAction } from 'mobx';
 import { INews } from './INews';
 import { INewsStore } from './NewsStore';
 
 export class NewsViewModel {
   public constructor(private store: INewsStore) {
     makeObservable(this);
-    this.showNext()
+    this.showNext();
   }
 
   @observable
   public pageNumber: number = 0;
 
   @observable
-  public recentNews: INews | undefined
+  public recentNews: INews | undefined;
 
   @computed
   public get ready(): boolean {
-    return !!this.recentNews
-  }
-  @action
-  public nextClick = (): void =>{
-    if (this.pageNumber < (this.store.newsCount - 1)) {
-            this.pageNumber++;
-    } else {
-      this.pageNumber = 0
-    }
+    return !!this.recentNews;
   }
 
- @action
+  @action
+  public nextClick = (): void => {
+    if (this.pageNumber < this.store.newsCount - 1) {
+      this.pageNumber++;
+    } else {
+      this.pageNumber = 0;
+    }
+  };
+
+  @action
   public backClick = (): void => {
     if (this.pageNumber > 0) {
       this.pageNumber--;
     } else {
-      this.pageNumber = this.store.newsCount - 1
+      this.pageNumber = this.store.newsCount - 1;
     }
-    }
+  };
 
+  @action
   public showNext(): void {
     reaction(
       () => this.pageNumber,
       (pageNumber) => {
-      this.pageNumber = pageNumber
-        this.init()
+        this.pageNumber = pageNumber;
+        this.init();
       },
       {
         fireImmediately: true,
-      }
-      )
+      },
+    );
   }
 
   public async init() {
-    const news = await this.store.getNews(this.pageNumber)
-    runInAction(() =>
-    this.recentNews = news)
+    const news = await this.store.getNews(this.pageNumber);
+    runInAction(() => (this.recentNews = news));
   }
 
   @computed

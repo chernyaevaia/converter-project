@@ -6,7 +6,7 @@ const Logo: React.FC = () => {
       <h1 className={styles.petProject}>Pet Project</h1>
       <h2 className={styles.curRates}>Currency rates</h2>
     </header>
-  )
+  );
 };
 
 export { Logo };

@@ -6,12 +6,11 @@ import { ConverterCard } from './ConverterCard';
 
 @injectable()
 export abstract class IConverterStore {
-    public cardsArray: ConverterCard[] = []
+  public cardsArray: ConverterCard[] = [];
 }
 
 @injectable()
 export class ConverterStore implements IConverterStore {
-
   @observable
   private ratesMap: Map<string, ConverterCard> = new Map<string, ConverterCard>();
 
@@ -21,7 +20,6 @@ export class ConverterStore implements IConverterStore {
     this.updateRate();
   }
 
-  
   @computed
   public get cardsArray(): ConverterCard[] {
     return [...this.ratesMap.values()];

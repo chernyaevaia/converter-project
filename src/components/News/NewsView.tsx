@@ -13,9 +13,13 @@ export const NewsView: React.FC<Props> = (props) => {
     <div className={styles.newsContainer}>
       <h1 className={styles.headline}>{props.title}</h1>
       <p className={styles.description}>{props.description}</p>
-      <img className={styles.newsPic} src={props.urlToImage} alt="" />
-      <button onClick={props.nextClick} className={styles.nextBtn}>Next</button>
-      <button onClick={props.backClick} className={styles.backBtn}>Back</button>
+      <img className={styles.newsPic} src={props.urlToImage} alt='' />
+      <button onClick={props.nextClick} className={styles.nextBtn}>
+        Next
+      </button>
+      <button onClick={props.backClick} className={styles.backBtn}>
+        Back
+      </button>
     </div>
   );
 };
